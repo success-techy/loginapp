@@ -1,0 +1,51 @@
+from flask import Flask, render_template, request
+import boto3
+import os
+
+app = Flask(__name__)
+
+# Configuration for Amazon S3
+S3_BUCKET = 'demobucket-oct14'
+S3_REGION = 'us-east-1'
+S3_ACCESS_KEY_ID = 'AKIATVFL4MMXUX64NAN7'
+S3_SECRET_ACCESS_KEY = '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'
+
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=S3_ACCESS_KEY_ID,
+    aws_secret_access_key=S3_SECRET_ACCESS_KEY,
+    region_name=S3_REGION
+)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return 'No file part'
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return 'No selected file'
+
+    # Save the uploaded file to a temporary location on the server
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(file_path)
+
+    # Upload the file to Amazon S3
+    s3_client.upload_file(
+        file_path,
+        S3_BUCKET,
+        file.filename,
+        ExtraArgs={'ACL': 'public-read'}
+    )
+
+    return 'File uploaded successfully'
+
+if __name__ == '__main__':
+    app.config['UPLOAD_FOLDER'] = '/tmp'  # Change this to your desired temporary folder
+    app.run(debug=True)
+
