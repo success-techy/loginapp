@@ -26,7 +26,8 @@ def login():
     cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
     user = cursor.fetchone()
     if user:
-         return "Login successful!"
+         #return "Login successful!"
+        return redirect("https://facebook.com")
     else:
 
          return "Invalid username or password"
