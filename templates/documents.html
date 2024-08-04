@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+        }
+        .buttons button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #e0e0e0;
+        }
+        .documents-list {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            max-width: 800px;
+        }
+        .documents-list a {
+            display: block;
+            margin: 10px 0;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .documents-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button onclick="window.location.href='{{ url_for('videos') }}'">Videos</button>
+        <button onclick="window.location.href='{{ url_for('index') }}'">Logout</button>
+    </div>
+    <h1>Documents</h1>
+    <div class="documents-list">
+        <h2>Available Documents:</h2>
+        <a href="https://myclassbucket03082024.s3.amazonaws.com/Linux%2BQuickstart%2BV5.pdf" target="_blank">Linux Quickstart V5</a>
+        <a href="https://myclassbucket03082024.s3.amazonaws.com/AnotherDocument.pdf" target="_blank">Another Document</a>
+        <!-- Add more links as needed -->
+    </div>
+</body>
+</html>
+
