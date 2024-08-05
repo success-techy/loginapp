@@ -5,9 +5,9 @@ app = Flask(__name__, static_url_path='/static')
 
 # MySQL Connection
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Redhat@123",
+    host="database-1.c3qmsqu6ilty.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="Redhat123",
     database="myproject"
 )
 
