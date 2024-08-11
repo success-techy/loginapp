@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+        }
+        .header button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .header button:hover {
+            background-color: #e0e0e0;
+        }
+        .video-container {
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            max-width: 80%;
+        }
+        video {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="window.location.href='{{ url_for('documents') }}'">Documents</button>
+        <button onclick="window.location.href='{{ url_for('index') }}'">Logout</button>
+    </div>
+    <div class="video-container">
+        <h2>CIDR</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/CIDR.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="video-container">
+        <h2>AWS Intro</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/AWS-Intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+
+    <div class="video-container">
+        <h2>AWS VPC</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/VPC.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="video-container">
+        <h2>AWS VPC with TF</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/VPC-TF.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="video-container">
+	    <h2>EC2</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/EC2-TF.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="video-container">
+        <h2>Load Balancer</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/ELB.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="video-container">
+	  <h2>LoadBalancer with TF</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/ELB-TF.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+        <div class="video-container">
+        <h2>Autoscaling Group</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/ASG.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+        <div class="video-container">
+        <h2>NAT Gateway</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/NAT-PEER.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+        <div class="video-container">
+        <h2>AWS Project</h2>
+        <video controls>
+            <source src="https://d15modgs1qo4wy.cloudfront.net/ptyhon-app-videos.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Add more video containers as needed -->
+</body>
+</html>
+
