@@ -25,9 +25,23 @@ def login():
     cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
     user = cursor.fetchone()
     if user:
-        return redirect(url_for('videos'))
+        #return redirect(url_for('videos'))
+        return redirect(url_for('language'))
     else:
         return "Invalid username or password"
+
+
+@app.route('/language', methods=['GET', 'POST'])
+def language():
+    if request.method == 'POST':
+        language = request.form['language']
+        if language == 'tamil':
+            return redirect(url_for('videos'))
+        elif language == 'english':
+            return redirect(url_for('videos_en'))
+        else:
+            return "Invalid language selection"
+    return render_template('language.html')
 
 @app.route('/documents')
 def documents():
@@ -36,6 +50,10 @@ def documents():
 @app.route('/videos')
 def videos():
     return render_template('videos.html')
+
+@app.route('/videos_en')
+def videos_en():
+    return render_template('videos_en.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
