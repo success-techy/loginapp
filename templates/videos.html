@@ -88,6 +88,19 @@
             opacity: 0.8;
         }
     </style>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+
 </head>
 <body>
     <div class="header">
