@@ -11,7 +11,7 @@
             flex-direction: column;
             align-items: center;
             margin: 0;
-            background-image: url('https://myclassbucket03082024.s3.amazonaws.com/images/border.png');
+            background-image: url('https://myclassbucket03082024.s3.amazonaws.com/images/border.png'); /* Replace with your background image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -22,7 +22,7 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 20px;
-            background-color: rgba(0, 123, 255, 0.8);
+            background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue */
             color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -55,24 +55,10 @@
             border-radius: 4px;
             background-color: #fff;
         }
-        .thumbnail video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
         .thumbnail img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 2;
-            pointer-events: none; /* Allow clicks to pass through the image */
         }
         .thumbnail a {
             display: block;
@@ -81,7 +67,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 3;
+            z-index: 1;
             text-decoration: none;
         }
         .thumbnail a:hover {
@@ -96,10 +82,11 @@
     </div>
     <div class="thumbnail-container">
         <div class="thumbnail">
-            <video controls controlsList="nodownload">
-                <source src="https://d15modgs1qo4wy.cloudfront.net/videos/CIDR.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+	    <video controls controlsList="nodownload" style="width: 100%; height: 100%;">
+            <source src="https://d15modgs1qo4wy.cloudfront.net/videos/CIDR.mp4" type="video/mp4">
+             Your browser does not support the video tag
+	     </video>
+	     <!--   <a href="https://d15modgs1qo4wy.cloudfront.net/videos/CIDR.mp4"></a> -->
             <img src="https://myclassbucket03082024.s3.amazonaws.com/images/cidrlogo.png" alt="CIDR">
         </div>
         <div class="thumbnail">
@@ -141,7 +128,8 @@
         <div class="thumbnail">
             <a href="https://d15modgs1qo4wy.cloudfront.net/videos/IAM.mp4"></a>
             <img src="project.png" alt="IAM">
-        </div>
+	</div>
+
     </div>
 </body>
 </html>
