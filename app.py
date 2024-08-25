@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -24,8 +24,11 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
+    cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
     user = cursor.fetchone()
+
+    #cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
+    #user = cursor.fetchone()
     if user and check_password_hash(user[0], password):
          session['user'] = username
          return redirect(url_for('language'))
