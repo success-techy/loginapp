@@ -28,7 +28,7 @@ def login():
     cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
     user = cursor.fetchone()
     
-    if user and check_password_hash(user[0], password):
+    if user and check_password_hash(user[1], password):
         session['user'] = username
         return redirect(url_for('language'))
     else:
