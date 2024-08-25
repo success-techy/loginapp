@@ -24,11 +24,18 @@ def login():
 
     cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
     user = cursor.fetchone()
-    if user:
+     if user and check_password_hash(user[0], password):
+         session['user'] = username
+         return redirect(url_for('language'))
+     else:
+         flash("Invalid username or password")
+         return redirect(url_for('index'))
+ 
+    #if user:
         #return redirect(url_for('videos'))
-        return redirect(url_for('language'))
-    else:
-        return "Invalid username or password"
+     #   return redirect(url_for('language'))
+    #else:
+     #   return "Invalid username or password"
 
 
 @app.route('/language', methods=['GET', 'POST'])
