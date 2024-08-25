@@ -24,10 +24,10 @@ def login():
 
     cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
     user = cursor.fetchone()
-     if user and check_password_hash(user[0], password):
+    if user and check_password_hash(user[0], password):
          session['user'] = username
          return redirect(url_for('language'))
-     else:
+    else:
          flash("Invalid username or password")
          return redirect(url_for('index'))
  
