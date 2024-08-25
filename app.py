@@ -56,7 +56,11 @@ def documents():
 
 @app.route('/videos')
 def videos():
+    if 'user' not in session:
+        flash("Please log in to access this page.")
+        return redirect(url_for('index'))
     return render_template('videos.html')
+    #return render_template('videos.html')
 
 @app.route('/videos_en')
 def videos_en():
