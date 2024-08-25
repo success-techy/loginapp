@@ -28,11 +28,13 @@ def login():
     cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
     user = cursor.fetchone()
     
-    if user and check_password_hash(user[1], password):
+    if user and check_password_hash(user[0], password):
         session['user'] = username
+        print("User logged in:", username) 
         return redirect(url_for('language'))
     else:
         flash("Invalid username or password")
+        print("Login failed for:", username) 
         return redirect(url_for('index'))
 
 @app.route('/language', methods=['GET', 'POST'])
