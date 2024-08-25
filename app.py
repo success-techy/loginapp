@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 app = Flask(__name__, static_url_path='/static')
+app.secret_key = os.environ.get('SECRET_KEY', 'default_secret_key')  # Secret key for session management
 
 # MySQL Connection
 db = mysql.connector.connect(
@@ -26,25 +27,20 @@ def login():
 
     cursor.execute("SELECT password FROM users WHERE username=%s", (username,))
     user = cursor.fetchone()
-
-    #cursor.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
-    #user = cursor.fetchone()
+    
     if user and check_password_hash(user[0], password):
-         session['user'] = username
-         return redirect(url_for('language'))
+        session['user'] = username
+        return redirect(url_for('language'))
     else:
-         flash("Invalid username or password")
-         return redirect(url_for('index'))
- 
-    #if user:
-        #return redirect(url_for('videos'))
-     #   return redirect(url_for('language'))
-    #else:
-     #   return "Invalid username or password"
-
+        flash("Invalid username or password")
+        return redirect(url_for('index'))
 
 @app.route('/language', methods=['GET', 'POST'])
 def language():
+    if 'user' not in session:
+        flash("Please log in to access this page.")
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         language = request.form['language']
         if language == 'tamil':
@@ -57,6 +53,9 @@ def language():
 
 @app.route('/documents')
 def documents():
+    if 'user' not in session:
+        flash("Please log in to access this page.")
+        return redirect(url_for('index'))
     return render_template('documents.html')
 
 @app.route('/videos')
@@ -65,10 +64,12 @@ def videos():
         flash("Please log in to access this page.")
         return redirect(url_for('index'))
     return render_template('videos.html')
-    #return render_template('videos.html')
 
 @app.route('/videos_en')
 def videos_en():
+    if 'user' not in session:
+        flash("Please log in to access this page.")
+        return redirect(url_for('index'))
     return render_template('videos_en.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -81,17 +82,26 @@ def register():
             cursor.execute("SELECT * FROM users WHERE username=%s", (username,))
             existing_user = cursor.fetchone()
             if existing_user:
-                return "Username already exists"
+                flash("Username already exists")
+                return redirect(url_for('register'))
             else:
-                cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+                hashed_password = generate_password_hash(password)
+                cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_password))
                 db.commit()
-                return "Registration successful!"
+                flash("Registration successful!")
+                return redirect(url_for('index'))
         except Exception as e:
             db.rollback()
-            return f"Error occurred: {str(e)}"
+            flash(f"Error occurred: {str(e)}")
+            return redirect(url_for('register'))
     else:
         return render_template('register.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('user', None)  # Remove the user from the session
+    flash("You have been logged out.")
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
