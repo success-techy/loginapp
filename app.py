@@ -5,13 +5,36 @@ app = Flask(__name__, static_url_path='/static')
 
 # MySQL Connection
 db = mysql.connector.connect(
-    host="database-1.c3qmsqu6ilty.us-east-1.rds.amazonaws.com",
-    user="admin",
-    password="Redhat123",
+    host="localhost",
+    user="root",
+    password="Success#123",
+)
+
+
+cursor = db.cursor()
+
+cursor.execute("CREATE DATABASE IF NOT EXISTS myproject")
+
+db.close()
+
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Success#123",
     database="myproject"
 )
 
 cursor = db.cursor()
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(255) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL
+    )
+""")
+
 
 @app.route('/')
 def index():
