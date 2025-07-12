@@ -17,4 +17,7 @@ EOF
 sudo dnf clean all
 sudo dnf install -y MariaDB-server MariaDB-client
 
+mysql_secure_installation
+
+
 
