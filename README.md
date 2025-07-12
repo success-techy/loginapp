@@ -17,7 +17,35 @@ EOF
 sudo dnf clean all
 sudo dnf install -y MariaDB-server MariaDB-client
 
-mysql_secure_installation
+systemctl start mariadb
+
+mysqladmin -u root password 'Success@123'
+
+mysql -uroot -hlocalhost -pSuccess@123
+
+MariaDB [(none)]>  create database myproject;
+
+MariaDB [(none)]>  use myproject;
+
+MariaDB [(none)]>  CREATE TABLE users (username VARCHAR(50), password VARCHAR(255));
+
+MariaDB [(none)]> insert into users values('admin', 'Mypassword');
+
+MariaDB [myproject]> \q
+
+
+#vi app.py   (change the password)  - it should be 2 places.
+
+# MySQL Connection
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Success@123",
+)
+
+#pip3 install --no-cache-dir flask mysql-connector-python boto3
+
+#python3 app.py
 
 
 
